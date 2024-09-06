@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="venv/konrix/static/images/logo.png" alt="Renault Logo" width="80" height="80">
+  <img src="img/renaultLogo.png" alt="Renault Logo" width="400" height="180">
 </p>
 
 # Renault Transformation Day Project
