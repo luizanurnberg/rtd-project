@@ -1,27 +1,24 @@
 package com.rtd.project.model;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class MachineUsage {
-    private LocalDate date;
+    private final LocalDate date;
     private boolean hasProblem;
     private Double temperature;
     private Double usage;
+    private final Machine machine;
 
-    public MachineUsage(LocalDate date, boolean hasProblem, Double temperature, Double usage) {
+    public MachineUsage(LocalDate date, boolean hasProblem, Double temperature, Double usage, Machine machine) {
         this.date = date;
         this.hasProblem = hasProblem;
         this.temperature = temperature;
         this.usage = usage;
+        this.machine = machine;
     }
 
     public LocalDate getDate() {
         return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
     }
 
     public boolean isHasProblem() {
@@ -46,5 +43,9 @@ public class MachineUsage {
 
     public void setUsage(Double usage) {
         this.usage = usage;
+    }
+
+    public Machine getMachine() {
+        return machine;
     }
 }
