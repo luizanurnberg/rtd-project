@@ -6,29 +6,43 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
 @Entity
 @Table(name ="machine")
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class MachineEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    @Column()
+    @Column(nullable = false)
     private String name;
-    @Column()
+    @Column(nullable = false)
     private String brand;
-    @Column()
+    @Column(nullable = false)
     private LocalTime startTime;
-    @Column()
+    @Column(nullable = false)
     private LocalTime endTime;
-    @Column()
+    @Column(nullable = false)
     private String machineIPAddress;
-    @Column()
-    @OneToMany(targetEntity = MachineUsageEntity.class, cascade = CascadeType.ALL)
+    @Column(nullable = false)
+    @OneToMany(mappedBy = "machine", targetEntity = MachineUsageEntity.class, cascade = CascadeType.ALL)
     private List<MachineUsageEntity> usage;
+    @Column(nullable = false,updatable = false)
+    public LocalDateTime createdAt;
+    @Column(nullable = false)
+    public LocalDateTime updatedAt;
+
+    @PrePersist
+    private void onCrate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    private void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }
