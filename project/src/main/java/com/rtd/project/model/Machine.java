@@ -11,7 +11,7 @@ public class Machine {
     private LocalTime startTime;
     private LocalTime endTime;
     private String machineIPAddress;
-    private List<MachineUsage> usage;
+    private List<MachineUsage> usages;
 
     public Machine(String name, String brand, LocalTime startTime, LocalTime endTime, String machineIPAddress) {
         this.name = name;
@@ -65,5 +65,17 @@ public class Machine {
 
     public void setMachineIPAddress(String machineIPAddress) {
         this.machineIPAddress = machineIPAddress;
+    }
+
+    public List<MachineUsage> getUsage() {
+        return usages;
+    }
+
+    public void setUsage(List<MachineUsage> usageList) {
+        this.usages = usageList;
+    }
+
+    public void addUsage(MachineUsage usage) {
+        this.usages.add(usage);
     }
 }
