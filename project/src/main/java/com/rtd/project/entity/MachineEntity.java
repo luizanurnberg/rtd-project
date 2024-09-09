@@ -35,6 +35,8 @@ public class MachineEntity {
     public LocalDateTime createdAt;
     @Column(nullable = false)
     public LocalDateTime updatedAt;
+    @Column(nullable = false)
+    public boolean isTurnedOn;
 
     @PrePersist
     private void onCrate() {
