@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface MachineRepository extends JpaRepository<MachineEntity, Long> {
-   Optional<MachineEntity> getMachineByMachineIPAddress(String ipAddress);
-   List<MachineEntity> getAllByBrand(String brand);
+   Optional<MachineEntity> findByMachineIPAddress(String ipAddress);
+   List<MachineEntity> findAllByBrand(String brand);
 }

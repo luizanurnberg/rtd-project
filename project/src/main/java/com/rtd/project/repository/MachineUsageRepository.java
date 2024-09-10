@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface MachineUsageRepository extends JpaRepository<MachineUsageEntity, Long> {
-    List<MachineUsageEntity> getAllByDate();
-    List<MachineUsageEntity> getAllByHasProblem();
-    List<MachineUsageEntity> getAllByMachineId(Long machineId);
+    List<MachineUsageEntity> findAllByDate();
+    List<MachineUsageEntity> findAllByHasProblem();
+    List<MachineUsageEntity> findAllByMachineId(Long machineId);
 }

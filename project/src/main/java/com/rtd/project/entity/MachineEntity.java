@@ -2,9 +2,7 @@ package com.rtd.project.entity;
 
 import com.rtd.project.model.MachineUsage;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -28,7 +26,7 @@ public class MachineEntity {
     private LocalTime endTime;
     @Column(nullable = false)
     private String machineIPAddress;
-    @Column(nullable = false)
+    @Column(nullable = true)
     @OneToMany(mappedBy = "machine", targetEntity = MachineUsageEntity.class, cascade = CascadeType.ALL)
     private List<MachineUsageEntity> usage;
     @Column(nullable = false,updatable = false)

@@ -1,6 +1,9 @@
 package com.rtd.project.model.dto;
 
-import java.time.LocalTime;
+import com.rtd.project.entity.MachineUsageEntity;
 
-public record MachineResponseDto(Long id, String name, String brand, LocalTime startTime, LocalTime endTime, String ipAddress, Double usage) {
+import java.time.LocalTime;
+import java.util.List;
+
+public record MachineResponseDto(Long id, String name, String brand, LocalTime startTime, LocalTime endTime, String ipAddress, List<MachineUsageEntity> machineUsage, boolean hasProblem) {
 }
