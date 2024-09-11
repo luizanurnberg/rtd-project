@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/machine")
 public class MachineController {
     private final MachineService machineService;
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<ApiResponse<MachineResponseDto>> createMachine(@RequestBody MachineRequestDto machineRequestDto) {
         try {
             MachineResponseDto machineDto = machineService.createMachine(machineRequestDto);
@@ -29,4 +29,5 @@ public class MachineController {
            return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }

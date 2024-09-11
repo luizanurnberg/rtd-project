@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MachineFactory {
     public static Machine create(String name, String brand, LocalTime startTime, LocalTime endTime, String machineIPAddress, boolean isTurnedOn) throws MachineStartTimeException{
-        if(startTime.isBefore(endTime)){
+        if(startTime.isAfter(endTime)){
             throw new MachineStartTimeException();
         }
         Machine machine = new Machine(name, brand, startTime, endTime, machineIPAddress, isTurnedOn);
