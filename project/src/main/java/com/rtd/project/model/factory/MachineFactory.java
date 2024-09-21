@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MachineFactory {
-    public static Machine create(String name, String brand, LocalTime startTime, LocalTime endTime, String machineIPAddress) throws MachineStartTimeException{
-        if(startTime.isBefore(endTime)){
+    public static Machine create(String name, String brand, LocalTime startTime, LocalTime endTime, String machineIPAddress, boolean isTurnedOn) throws MachineStartTimeException{
+        if(startTime.isAfter(endTime)){
             throw new MachineStartTimeException();
         }
-        Machine machine = new Machine(name, brand, startTime, endTime, machineIPAddress);
+        Machine machine = new Machine(name, brand, startTime, endTime, machineIPAddress, isTurnedOn);
         List <MachineUsage> usageList = new ArrayList<>();
         machine.setUsage(usageList);
         return machine;

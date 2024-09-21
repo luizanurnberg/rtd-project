@@ -12,13 +12,27 @@ public class Machine {
     private LocalTime endTime;
     private String machineIPAddress;
     private List<MachineUsage> usages;
+    private boolean isTurnedOn;
 
-    public Machine(String name, String brand, LocalTime startTime, LocalTime endTime, String machineIPAddress) {
+    public Machine(String name, String brand, LocalTime startTime, LocalTime endTime, String machineIPAddress, boolean isTurnedOn) {
         this.name = name;
         this.brand = brand;
         this.startTime = startTime;
         this.endTime = endTime;
         this.machineIPAddress = machineIPAddress;
+        this.isTurnedOn = isTurnedOn;
+    }
+
+    public void turnOn() {
+        this.isTurnedOn = true;
+    }
+
+    public void turnOff() {
+        this.isTurnedOn = false;
+    }
+
+    public boolean isMachineOn() {
+        return this.isTurnedOn;
     }
 
     public String getName() {
