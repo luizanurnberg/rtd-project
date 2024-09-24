@@ -17,11 +17,12 @@ public class Menu extends JFrame {
 
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(new Dimension(2000, 1000));
+        layeredPane.setLayout(null);
 
         BackgroundPanel backgroundPanel = new BackgroundPanel("src/main/resources/static/menuBackground.png");
-        backgroundPanel.setBounds(0, 0, 2000, 1000);
+        backgroundPanel.setBounds(0, 0, getWidth(), getHeight());
         layeredPane.add(backgroundPanel, Integer.valueOf(0));
-
+        
         ImageIcon logoIcon = new ImageIcon("src/main/resources/static/renaultLogoHeader.png");
         Image scaledLogo = logoIcon.getImage().getScaledInstance(2000, 80, Image.SCALE_SMOOTH);
         JLabel logoLabel = new JLabel(new ImageIcon(scaledLogo));
@@ -38,20 +39,25 @@ public class Menu extends JFrame {
         int buttonHeight = 150;
         int horizontalSpacing = 50;
 
+
+        int totalWidth = layeredPane.getWidth(); 
+
+        int buttonX = (totalWidth - (buttonWidth * 2 + horizontalSpacing)) / 2;
+
         RoundedButton predictButton = new RoundedButton("src/main/resources/static/predictIcon.png", "Predições");
-        predictButton.setBounds((2000 - (buttonWidth * 2 + horizontalSpacing)) / 2, 350, buttonWidth, buttonHeight);
+        predictButton.setBounds((2000 - (buttonWidth * 3 + horizontalSpacing)) / 3 + buttonWidth + horizontalSpacing, 330, buttonWidth, buttonHeight);
         predictButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                dispose();
-                Predict predictScreen = new Predict();
-                predictScreen.showPredict();
-            }
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            dispose();
+            Predict predictScreen = new Predict();
+            predictScreen.showPredict();
+           }
         });
         layeredPane.add(predictButton, Integer.valueOf(1));
 
         RoundedButton manageButton = new RoundedButton("src/main/resources/static/manageIcon.png", "Gerenciar Equipamentos");
-        manageButton.setBounds((2000 - (buttonWidth * 2 + horizontalSpacing)) / 2 + buttonWidth + horizontalSpacing, 350, buttonWidth, buttonHeight);
+        manageButton.setBounds((2000 - (buttonWidth * 3 + horizontalSpacing)) / 3, 330, buttonWidth, buttonHeight);
         manageButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -60,13 +66,15 @@ public class Menu extends JFrame {
                 manageScreen.showMachine();
             }
         });
+        
         layeredPane.add(manageButton, Integer.valueOf(1));
-
-        add(layeredPane);
-    }
+                add(layeredPane);
+                pack();
+                setLocationRelativeTo(null);
+                backgroundPanel.setBounds(0, 0, getWidth(), getHeight());
+            }
 
     public void showMenu() {
         setVisible(true);
     }
 }
-
