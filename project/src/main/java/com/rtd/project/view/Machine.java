@@ -34,6 +34,11 @@ public class Machine extends JFrame {
         logoLgLabel.setBounds(50, 15, 180, 50);
         layeredPane.add(logoLgLabel, Integer.valueOf(2));
         
+        ImageIcon imagemIcon = new ImageIcon("src/main/resources/static/personIcon.jpeg");
+        JLabel personIcon = new JLabel(imagemIcon);
+        personIcon.setBounds(1250, 15, 50, 50);
+        layeredPane.add(personIcon, Integer.valueOf(2));
+        
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 20));
         searchPanel.setOpaque(false);
         
@@ -108,16 +113,10 @@ public class Machine extends JFrame {
         buttonParear.addActionListener((ActionEvent e) -> 
         JOptionPane.showMessageDialog(null, "Buscando Equipamento", null, JOptionPane.INFORMATION_MESSAGE)
         );
+        
     }
 
     public void showMachine() {
         setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            Machine machine = new Machine();
-            machine.showMachine();
-        });
     }
 }
