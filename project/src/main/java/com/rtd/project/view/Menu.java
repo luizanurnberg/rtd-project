@@ -45,7 +45,7 @@ public class Menu extends JFrame {
         int buttonX = (totalWidth - (buttonWidth * 2 + horizontalSpacing)) / 2;
 
         RoundedButton predictButton = new RoundedButton("src/main/resources/static/predictIcon.png", "Predições");
-        predictButton.setBounds((2000 - (buttonWidth * 3 + horizontalSpacing)) / 3 + buttonWidth + horizontalSpacing, 330, buttonWidth, buttonHeight);
+        predictButton.setBounds((2000 - (buttonWidth * 3 + horizontalSpacing)) / 3, 330, buttonWidth, buttonHeight);
         predictButton.addMouseListener(new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -57,7 +57,7 @@ public class Menu extends JFrame {
         layeredPane.add(predictButton, Integer.valueOf(1));
 
         RoundedButton manageButton = new RoundedButton("src/main/resources/static/manageIcon.png", "Gerenciar Equipamentos");
-        manageButton.setBounds((2000 - (buttonWidth * 3 + horizontalSpacing)) / 3, 330, buttonWidth, buttonHeight);
+        manageButton.setBounds((2000 - (buttonWidth * 3 + horizontalSpacing)) / 3 + buttonWidth + horizontalSpacing, 330, buttonWidth, buttonHeight);
         manageButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
