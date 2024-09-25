@@ -22,19 +22,19 @@ public class Machine extends JFrame {
         Font fieldFont = new Font("Arial", Font.PLAIN, 16);
         Font buttonFont = new Font("Arial", Font.BOLD, 15);
 
-        ImageIcon logoIcon = new ImageIcon("src/main/resources/static/renaultLogoHeader.png");
+        ImageIcon logoIcon = new ImageIcon(getClass().getClassLoader().getResource("static/renaultLogoHeader.png").getPath());
         Image scaledLogo = logoIcon.getImage().getScaledInstance(2000, 80, Image.SCALE_SMOOTH);
         JLabel logoLabel = new JLabel(new ImageIcon(scaledLogo));
         logoLabel.setBounds(0, 0, 2000, 80);
         layeredPane.add(logoLabel, Integer.valueOf(1));
 
-        ImageIcon logoLgIcon = new ImageIcon("src/main/resources/static/renaultLogoLg.png");
+        ImageIcon logoLgIcon = new ImageIcon(getClass().getClassLoader().getResource("static/renaultLogoLg.png").getPath());
         Image scaledLogoLg = logoLgIcon.getImage().getScaledInstance(180, 50, Image.SCALE_SMOOTH);
         JLabel logoLgLabel = new JLabel(new ImageIcon(scaledLogoLg));
         logoLgLabel.setBounds(50, 15, 180, 50);
         layeredPane.add(logoLgLabel, Integer.valueOf(2));
         
-        ImageIcon imagemIcon = new ImageIcon("src/main/resources/static/personIcon.jpeg");
+        ImageIcon imagemIcon = new ImageIcon(getClass().getClassLoader().getResource("static/personIcon.jpeg").getPath());
         JLabel personIcon = new JLabel(imagemIcon);
         personIcon.setBounds(1250, 15, 50, 50);
         layeredPane.add(personIcon, Integer.valueOf(2));
@@ -64,7 +64,7 @@ public class Machine extends JFrame {
         int horizontalSpacing = 50;
         
         try{
-        BufferedImage originalImage = ImageIO.read(new File("src/main/resources/static/garbageIcon.png"));
+        BufferedImage originalImage = ImageIO.read(new File(getClass().getClassLoader().getResource("static/garbageIcon.png").getPath()));
             
         int newWidth = 70; 
         int newHeight = 70; 

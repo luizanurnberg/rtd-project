@@ -13,7 +13,8 @@ public class Login extends JFrame {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
 
-        BackgroundPanel backgroundPanel = new BackgroundPanel("src/main/resources/static/background.png");
+        BackgroundPanel backgroundPanel = new BackgroundPanel(
+                getClass().getClassLoader().getResource("static/background.png").getPath());
         backgroundPanel.setLayout(new GridBagLayout());
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -29,7 +30,7 @@ public class Login extends JFrame {
         GridBagConstraints loginGbc = new GridBagConstraints();
         loginGbc.insets = new Insets(10, 10, 10, 10);
 
-        ImageIcon logoIcon = new ImageIcon("src/main/resources/static/renaultLogoSm.png");
+        ImageIcon logoIcon = new ImageIcon(getClass().getClassLoader().getResource("static/renaultLogoSm.png").getPath());
 
         Image logoImage = logoIcon.getImage();
         Image scaledLogoImage = logoImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
