@@ -2,9 +2,15 @@ package com.rtd.project.view;
 
 import javax.swing.*;
 import java.awt.*;
+import javax.swing.border.LineBorder;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -23,37 +29,83 @@ public class Predict extends JFrame {
 
         getContentPane().setBackground(Color.WHITE);
 
-        // JLayeredPane para as logos
+        //Header
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(new Dimension(2000, 100));
         layeredPane.setBackground(new Color(255, 255, 255));
 
-        ImageIcon logoIcon = new ImageIcon("C:/Users/User/OneDrive/Documentos/rtd-project/project/src/main/resources/static/renaultLogoHeader.png");
+        ImageIcon logoIcon = new ImageIcon("src/main/resources/static/renaultLogoHeader.png");
         Image scaledLogo = logoIcon.getImage().getScaledInstance(2000, 80, Image.SCALE_SMOOTH);
         JLabel logoLabel = new JLabel(new ImageIcon(scaledLogo));
         logoLabel.setBounds(0, 0, 2000, 80);
         layeredPane.add(logoLabel, Integer.valueOf(1));
 
-        ImageIcon logoLgIcon = new ImageIcon("C:/Users/User/OneDrive/Documentos/rtd-project/project/src/main/resources/static/renaultLogoLg.png");
+        ImageIcon logoLgIcon = new ImageIcon("src/main/resources/static/renaultLogoLg.png");
         Image scaledLogoLg = logoLgIcon.getImage().getScaledInstance(180, 50, Image.SCALE_SMOOTH);
         JLabel logoLgLabel = new JLabel(new ImageIcon(scaledLogoLg));
         logoLgLabel.setBounds(50, 15, 180, 50);
         layeredPane.add(logoLgLabel, Integer.valueOf(2));
 
-        ImageIcon imagemIcon = new ImageIcon("C:/Users/User/OneDrive/Documentos/rtd-project/project/src/main/resources/static/personIcon.png");
+        ImageIcon imagemIcon = new ImageIcon("src/main/resources/static/personIcon.jpeg");
         JLabel personIcon = new JLabel(imagemIcon);
         personIcon.setBounds(1250, 15, 50, 50);
         layeredPane.add(personIcon, Integer.valueOf(3));
 
-        // Adiciona o painel com logos na parte superior
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbc.weightx = 1.0;
-        gbc.weighty = 0.1;
+        gbc.weighty = 0.2;
         gbc.insets = new Insets(0, 0, 0, 0);
         add(layeredPane, gbc);
+
+        //Lengendas
+        JLabel text1 = new JLabel("Consumo de Energia Atual");
+        text1.setFont(new Font("Poppins", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0;
+        gbc.insets = new Insets(0, 55, 0, 0);
+        add(text1, gbc);
+
+        JLabel text2 = new JLabel("Status das Máquinas");
+        text2.setFont(new Font("Poppins", Font.PLAIN, 14));
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0;
+        gbc.insets = new Insets(0, 55, 0, 0);
+        add(text2, gbc);
+
+        JLabel text1legend = new JLabel("1-12 Ago, 2024");
+        text1legend.setFont(new Font("Poppins", Font.PLAIN, 10));
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0;
+        gbc.insets = new Insets(0, 55, 0, 0);
+        add(text1legend, gbc);
+
+        JLabel text2legend = new JLabel("1-6 Ago, 2024");
+        text2legend.setFont(new Font("Poppins", Font.PLAIN, 10));
+
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0;
+        gbc.insets = new Insets(0, 55, 0, 0);
+        add(text2legend, gbc);
 
         // Gráfico de Consumo (Barras)
         DefaultCategoryDataset consumoDataset = new DefaultCategoryDataset();
@@ -66,21 +118,29 @@ public class Predict extends JFrame {
         consumoDataset.addValue(2, "Última semana", "03");
 
         JFreeChart barChart = ChartFactory.createBarChart(
-            "Gráfico de Consumo", "Dias", "Consumo", consumoDataset);
-        barChart.getTitle().setFont(new Font("Poppins", Font.PLAIN, 18));
+                "Gráfico de Consumo", "", "", consumoDataset);
+        barChart.getTitle().setFont(new Font("Poppins", Font.BOLD, 18));
         barChart.getTitle().setHorizontalAlignment(HorizontalAlignment.LEFT);
-        barChart.getTitle().setPadding(0, 60, 0, 0);
+        barChart.getTitle().setPadding(10, 20, 5, 0);
+
+        barChart.getPlot().setBackgroundPaint(Color.WHITE);
+        barChart.getPlot().setOutlineVisible(false);
+
+        CategoryPlot barPlot = barChart.getCategoryPlot();
+        BarRenderer barRenderer = (BarRenderer) barPlot.getRenderer();
+        barRenderer.setSeriesPaint(0, new Color(255, 193, 7));
+        barRenderer.setSeriesPaint(1, new Color(96, 96, 96));
 
         ChartPanel barPanel = new ChartPanel(barChart);
         JPanel barChartPanel = new JPanel(new BorderLayout());
         barChartPanel.add(barPanel, BorderLayout.CENTER);
 
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 3;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.weightx = 0.5;
-        gbc.weighty = 0.4;
+        gbc.weightx = 0.3;
+        gbc.weighty = 0.3;
         gbc.insets = new Insets(0, 50, 10, 25);
         add(barChartPanel, gbc);
 
@@ -95,91 +155,202 @@ public class Predict extends JFrame {
         statusDataset.addValue(2, "Semana passada", "03");
 
         JFreeChart lineChart = ChartFactory.createLineChart(
-                "Status das Máquinas", "Dias", "Status",
+                "", "", "",
                 statusDataset);
         lineChart.getTitle().setFont(new Font("Poppins", Font.PLAIN, 18));
         lineChart.getTitle().setHorizontalAlignment(HorizontalAlignment.LEFT);
         lineChart.getTitle().setPadding(0, 60, 0, 0);
         ChartPanel linePanel = new ChartPanel(lineChart);
+
+        CategoryPlot linePlot = lineChart.getCategoryPlot();
+        LineAndShapeRenderer lineRenderer = (LineAndShapeRenderer) linePlot.getRenderer();
+        lineRenderer.setSeriesPaint(0, new Color(255, 193, 7));
+        lineRenderer.setSeriesPaint(1, new Color(96, 96, 96));
+
+        lineChart.getPlot().setBackgroundPaint(Color.WHITE);
+        lineChart.getPlot().setOutlineVisible(false);
+
         gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridy = 3;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.insets = new Insets(0, 25, 10, 50);
+        gbc.insets = new Insets(0, 25, 0, 50);
         add(linePanel, gbc);
 
-        // Gráfico de Sugestões de Ação (Círculos/Pizza)
+        //Lengendas
+        JLabel text3 = new JLabel("Sugestões de Ação");
+        text3.setFont(new Font("Poppins", Font.PLAIN, 14));
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0;
+        gbc.insets = new Insets(0, 55, 0, 0);
+
+        add(text3, gbc);
+
+        JLabel text4 = new JLabel("Predições de Consumo Futuro");
+        text4.setFont(new Font("Poppins", Font.PLAIN, 14));
+
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0;
+        gbc.insets = new Insets(0, 55, 0, 0);
+        add(text4, gbc);
+
+        JLabel text3cont = new JLabel("Baseado nas predições de consumo, desligar às 18h para reduzir o consumo noturno");
+        text3cont.setFont(new Font("Poppins", Font.PLAIN, 10));
+
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0;
+        gbc.insets = new Insets(0, 55, 0, 0);
+
+        add(text3cont, gbc);
+
+        JLabel text4cont = new JLabel("1-6 Ago, 2024");
+        text4cont.setFont(new Font("Poppins", Font.PLAIN, 10));
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0;
+        gbc.insets = new Insets(0, 55, 0, 0);
+
+        add(text4cont, gbc);
+
+        // Gráfico de Sugestões de Ação 
         DefaultPieDataset actionDataset = new DefaultPieDataset();
         actionDataset.setValue("19h - Reduz 62%", 62);
         actionDataset.setValue("18h - Reduz 82%", 82);
         actionDataset.setValue("20h - Reduz 75%", 75);
 
         JFreeChart pieChart = ChartFactory.createPieChart(
-                "Sugestões de Ação", actionDataset, true, true, false);
+                "", actionDataset, true, true, false);
         pieChart.getTitle().setFont(new Font("Poppins", Font.PLAIN, 18));
         pieChart.getTitle().setHorizontalAlignment(HorizontalAlignment.LEFT);
         pieChart.getTitle().setPadding(0, 10, 5, 0);
         ChartPanel piePanel = new ChartPanel(pieChart);
+
+        PiePlot piePlot = (PiePlot) pieChart.getPlot();
+        piePlot.setSectionPaint("19h - Reduz 62%", new Color(33, 150, 243));
+        piePlot.setSectionPaint("18h - Reduz 82%", new Color(255, 152, 0));
+        piePlot.setSectionPaint("20h - Reduz 75%", new Color(255, 87, 34));
+
+        pieChart.getPlot().setBackgroundPaint(Color.WHITE);
+        pieChart.getPlot().setOutlineVisible(false);
+        
+        piePlot.setLabelGenerator(null);  
+        piePlot.setLabelLinksVisible(false); 
+
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 6;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.weightx = 0.2;
         gbc.weighty = 0.3;
-        gbc.insets = new Insets(30, 50, 30, 50);
+        gbc.insets = new Insets(0, 50, 30, 50);
         add(piePanel, gbc);
 
-        // Gráfico de Predições de Consumo Futuro (Rosca/Pizza)
+        // Gráfico de Predições de Consumo Futuro 
         DefaultPieDataset futureDataset = new DefaultPieDataset();
         futureDataset.setValue("Tarde", 32);
         futureDataset.setValue("Noite", 40);
         futureDataset.setValue("Manhã", 28);
 
         JFreeChart futureChart = ChartFactory.createRingChart(
-                "Predições de Consumo Futuro", futureDataset, true, true, false);
+                "", futureDataset, true, true, false);
         futureChart.getTitle().setFont(new Font("Poppins", Font.PLAIN, 18));
         futureChart.getTitle().setHorizontalAlignment(HorizontalAlignment.LEFT);
         futureChart.getTitle().setPadding(0, 10, 5, 0);
+
         ChartPanel futurePanel = new ChartPanel(futureChart);
         gbc.gridx = 1;
-        gbc.gridy = 2;
+        gbc.gridy = 6;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.insets = new Insets(30, 50, 30, 50);
+        gbc.insets = new Insets(0, 0, 30, 0);
         add(futurePanel, gbc);
 
-        // Adicionar botões pequenos abaixo dos gráficos
+        PiePlot futurePlot = (PiePlot) futureChart.getPlot();
+        futurePlot.setSectionPaint("Tarde", new Color(255, 152, 0));
+        futurePlot.setSectionPaint("Noite", new Color(255, 193, 7));
+        futurePlot.setSectionPaint("Manhã", new Color(255, 235, 59));
+
+        futurePlot.setLabelGenerator(new StandardPieSectionLabelGenerator("{2}"));
+        futurePlot.setLabelFont(new Font("Poppins", Font.PLAIN, 12));
+        futurePlot.setLabelBackgroundPaint(Color.WHITE);
+
+        futureChart.getPlot().setBackgroundPaint(Color.WHITE);
+        futureChart.getPlot().setOutlineVisible(false);
+
+        //Botões
         JButton button1 = new JButton("ACEITAR SUGESTÃO");
         JButton button2 = new JButton("CONTROLE AUTOMÁTICO");
 
+        button1.setBackground(new Color(33, 150, 243));
+        button1.setForeground(Color.WHITE);
+        button1.setBorder(new LineBorder(new Color(33, 150, 243), 5));
+
+        button2.setBackground(new Color(255, 87, 34));
+        button2.setForeground(Color.WHITE);
+        button2.setBorder(new LineBorder(new Color(255, 87, 34), 5));
+
         gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 7;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 0.0;
         gbc.weighty = 0.0;
         gbc.insets = new Insets(5, 0, 30, 5);
-        gbc.anchor = GridBagConstraints.CENTER;  
-        gbc.fill = GridBagConstraints.NONE; 
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.NONE;
         add(button1, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 3;
+        gbc.gridy = 7;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 0.0;
         gbc.weighty = 0.0;
         gbc.insets = new Insets(5, 5, 30, 50);
-        gbc.anchor = GridBagConstraints.CENTER;  
+        gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
         add(button2, gbc);
+
+        //Footer
+        JLabel footerLabel = new JLabel("Copyright Renault. All rights reserved", JLabel.CENTER);
+        footerLabel.setFont(new Font("JetBrains Mono", Font.BOLD, 12));
+        footerLabel.setForeground(Color.BLACK);
+
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        gbc.gridwidth = 2;
+        gbc.gridheight = 1;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.0;
+        gbc.insets = new Insets(0, 0, 20, 0);
+        gbc.anchor = GridBagConstraints.PAGE_END;
+        add(footerLabel, gbc);
+
     }
 
     public void showPredict() {
         setVisible(true);
     }
 
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            Predict dashboard = new Predict();
+            dashboard.showPredict();
+        });
+    }
 
 }
-
-
