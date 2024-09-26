@@ -1,5 +1,8 @@
 package com.rtd.project.view;
 
+import com.rtd.project.service.ArduinoClient;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public final class Card extends JPanel {
     private ImageIcon icon;
-    private JButton button; 
+    private JButton button;
     private boolean status;
     private int idMaquina;
     private String nomeMaquina;
@@ -15,6 +18,9 @@ public final class Card extends JPanel {
     private String horario;
     private String responsavel;
     private String energia;
+
+    @Autowired
+    private ArduinoClient arduinoClient;
 
     public Card(ImageIcon icon, boolean status, int idMaquina, String nomeMaquina,String horario, String responsavel, String energia) {
         this.icon = icon;
@@ -26,88 +32,103 @@ public final class Card extends JPanel {
         this.energia = energia;
         setOpaque(false);
         Font font = new Font("Arial", Font.BOLD, 15);
-        
+
         setText(status);
         JButton buttoncard = new JButton(text);
         buttoncard.setBackground(new Color(230, 230, 230));
         buttoncard.setForeground(Color.BLACK);
         buttoncard.setFont(font);
         buttoncard.setOpaque(true);
-        buttoncard.setBounds(105, 345, 100, 30); 
+        buttoncard.setBounds(105, 345, 100, 30);
         buttoncard.setFocusPainted(false);
         buttoncard.setBorder(BorderFactory.createEmptyBorder());
-       
+
         add(buttoncard);
 
         buttoncard.addActionListener((ActionEvent e) -> {
             setStatus(status);
-            setText(getStatus()); 
-            buttoncard.setText(text); 
+            setText(getStatus());
+            buttoncard.setText(text);
+            sendRequestArduino();
         });
-        
-    setLayout(null);
-    JLabel label1 = new JLabel("ID Máquina:");
-    label1.setFont(font);
-    label1.setForeground(Color.BLACK);
-    label1.setBounds(40, 100, 100, 30); 
-    add(label1);
 
-    JLabel lableidMaquina = new JLabel(Integer.toString(idMaquina));
-    lableidMaquina.setFont(font);
-    lableidMaquina.setForeground(Color.BLACK);
-    lableidMaquina.setBounds(40, 122, 100, 30);
-    add(lableidMaquina);
-    
-    JLabel lable2 = new JLabel("Responsável pela Máquina:");
-    lable2.setFont(font);
-    lable2.setForeground(Color.BLACK);
-    lable2.setBounds(40, 150, 200, 30); 
-    add(lable2);
-    
-    JLabel responsavelMaquina = new JLabel(responsavel);
-    responsavelMaquina.setFont(font);
-    responsavelMaquina.setForeground(Color.BLACK);
-    responsavelMaquina.setBounds(40, 172, 200, 30); 
-    add(responsavelMaquina);
-    
-    JLabel lable3 = new JLabel("Horário de Funcionamento:");
-    lable3.setFont(font);
-    lable3.setForeground(Color.BLACK);
-    lable3.setBounds(40, 210, 200, 20); 
-    add(lable3);
-    
-    JLabel horarioFuncionamento = new JLabel(horario);
-    horarioFuncionamento.setFont(font);
-    horarioFuncionamento.setForeground(Color.BLACK);
-    horarioFuncionamento.setBounds(40, 232, 200, 20); 
-    add(horarioFuncionamento);
-    
-    JLabel lable4 = new JLabel("Energia Consumida:");
-    lable4.setFont(font);
-    lable4.setForeground(Color.BLACK);
-    lable4.setBounds(40, 262, 200, 20); 
-    add(lable4);
-    
-    JLabel energiaConsumida = new JLabel(energia);
-    energiaConsumida.setFont(font);
-    energiaConsumida.setForeground(Color.BLACK);
-    energiaConsumida.setBounds(40, 284, 200, 20); 
-    add(energiaConsumida);
+        setLayout(null);
+        JLabel label1 = new JLabel("ID Máquina:");
+        label1.setFont(font);
+        label1.setForeground(Color.BLACK);
+        label1.setBounds(40, 100, 100, 30);
+        add(label1);
+
+        JLabel lableidMaquina = new JLabel(Integer.toString(idMaquina));
+        lableidMaquina.setFont(font);
+        lableidMaquina.setForeground(Color.BLACK);
+        lableidMaquina.setBounds(40, 122, 100, 30);
+        add(lableidMaquina);
+
+        JLabel lable2 = new JLabel("Responsável pela Máquina:");
+        lable2.setFont(font);
+        lable2.setForeground(Color.BLACK);
+        lable2.setBounds(40, 150, 200, 30);
+        add(lable2);
+
+        JLabel responsavelMaquina = new JLabel(responsavel);
+        responsavelMaquina.setFont(font);
+        responsavelMaquina.setForeground(Color.BLACK);
+        responsavelMaquina.setBounds(40, 172, 200, 30);
+        add(responsavelMaquina);
+
+        JLabel lable3 = new JLabel("Horário de Funcionamento:");
+        lable3.setFont(font);
+        lable3.setForeground(Color.BLACK);
+        lable3.setBounds(40, 210, 200, 20);
+        add(lable3);
+
+        JLabel horarioFuncionamento = new JLabel(horario);
+        horarioFuncionamento.setFont(font);
+        horarioFuncionamento.setForeground(Color.BLACK);
+        horarioFuncionamento.setBounds(40, 232, 200, 20);
+        add(horarioFuncionamento);
+
+        JLabel lable4 = new JLabel("Energia Consumida:");
+        lable4.setFont(font);
+        lable4.setForeground(Color.BLACK);
+        lable4.setBounds(40, 262, 200, 20);
+        add(lable4);
+
+        JLabel energiaConsumida = new JLabel(energia);
+        energiaConsumida.setFont(font);
+        energiaConsumida.setForeground(Color.BLACK);
+        energiaConsumida.setBounds(40, 284, 200, 20);
+        add(energiaConsumida);
     }
-    
+
     public void setStatus(boolean status) {
         this.status = !status;
     }
-    
+
     public boolean getStatus() {
         return status;
     }
-    
+
     public void setText(boolean status) {
         if(status){
             this.text = "Ligada";
         }else {
             this.text = "Desligada";
+        }
+    }
+
+    private void sendRequestArduino(){
+        try {
+            if (status) {
+                arduinoClient.turnOnLed();
+                JOptionPane.showMessageDialog(null, "Máquina Ligada e LED LIGADO no Arduino!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                arduinoClient.turnOffLed();
+                JOptionPane.showMessageDialog(null, "Máquina Desligada e LED DESLIGADO no Arduino!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao se comunicar com o Arduino", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -127,15 +148,15 @@ public final class Card extends JPanel {
 
         g2d.setFont(new Font("Arial", Font.BOLD, 16));
         g2d.setColor(Color.BLACK);
-        FontMetrics fm = g2d.getFontMetrics(); 
-        
+        FontMetrics fm = g2d.getFontMetrics();
+
         int textX = (getWidth() - Math.max(fm.stringWidth(nomeMaquina), newIconWidth) - 40) / 2;
-        int textY = (getHeight() - newIconHeight) / 2 - 125; 
+        int textY = (getHeight() - newIconHeight) / 2 - 125;
         int iconX = (getWidth() - newIconWidth - fm.stringWidth(nomeMaquina) + 350) / 2; // Centraliza o ícone
-        int iconY = (getHeight() - newIconHeight) / 2 - 150; 
-        
+        int iconY = (getHeight() - newIconHeight) / 2 - 150;
+
         g2d.drawImage(scaledIcon.getImage(), iconX, iconY, null);
         g2d.drawString(nomeMaquina, textX, textY);
-      
+
     }
 }
