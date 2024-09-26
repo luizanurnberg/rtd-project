@@ -3,6 +3,8 @@ package com.rtd.project.view;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.LineBorder;
+
+import com.rtd.project.service.ArduinoClient;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -14,8 +16,10 @@ import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import java.awt.event.ActionEvent;
 
 public class Predict extends JFrame {
+    private ArduinoClient arduinoClient;
 
     public Predict() {
         setTitle("DashBoard");
@@ -294,6 +298,26 @@ public class Predict extends JFrame {
         //Botões
         JButton button1 = new JButton("ACEITAR SUGESTÃO");
         JButton button2 = new JButton("CONTROLE AUTOMÁTICO");
+
+        button1.addActionListener((ActionEvent e) -> {
+
+            try {
+                arduinoClient.turnOnLed();
+                JOptionPane.showMessageDialog(null, "Sugestão aceita e LED ligado no Arduino!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao se comunicar com o Arduino", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        button2.addActionListener((ActionEvent e) -> {
+
+            try {
+                arduinoClient.turnOnLed();
+                JOptionPane.showMessageDialog(null, "Controle automático ativado e LED desligado no Arduino!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao se comunicar com o Arduino", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        });
 
         button1.setBackground(new Color(33, 150, 243));
         button1.setForeground(Color.WHITE);
