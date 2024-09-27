@@ -16,6 +16,7 @@ import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+
 import java.awt.event.ActionEvent;
 import feign.Feign;
 import feign.jackson.JacksonDecoder;
@@ -74,6 +75,21 @@ public class Predict extends JFrame {
         gbc.weighty = 0.2;
         gbc.insets = new Insets(0, 0, 0, 0);
         add(layeredPane, gbc);
+
+        Font buttonFont = new Font("Arial", Font.BOLD, 15);
+        JButton backButton = new JButton("Voltar");
+        backButton.setBackground(new Color(211, 211, 211));
+        backButton.setFont(buttonFont);
+        backButton.setBounds(10, 100, 100, 30);
+        backButton.setFocusPainted(false);
+        backButton.setBorder(BorderFactory.createEmptyBorder());
+        layeredPane.add(backButton, Integer.valueOf(2));
+
+        backButton.addActionListener((ActionEvent e) -> {
+            dispose();
+            Menu menuScreen = new Menu();
+            menuScreen.showMenu();
+        });
 
         //Lengendas
         JLabel text1 = new JLabel("Consumo de Energia Atual");
@@ -192,8 +208,7 @@ public class Predict extends JFrame {
         gbc.insets = new Insets(0, 25, 0, 50);
         add(linePanel, gbc);
 
-        //Lengendas
-        JLabel text3 = new JLabel("Sugestões de Ação");
+        JLabel text3 = new JLabel("Sugestão de desligamento");
         text3.setFont(new Font("Poppins", Font.PLAIN, 14));
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -241,70 +256,6 @@ public class Predict extends JFrame {
         gbc.insets = new Insets(0, 55, 0, 0);
 
         add(text4cont, gbc);
-
-        // Gráfico de Sugestões de Ação 
-        DefaultPieDataset actionDataset = new DefaultPieDataset();
-        actionDataset.setValue("19h - Reduz 62%", 62);
-        actionDataset.setValue("18h - Reduz 82%", 82);
-        actionDataset.setValue("20h - Reduz 75%", 75);
-
-        JFreeChart pieChart = ChartFactory.createPieChart(
-                "", actionDataset, true, true, false);
-        pieChart.getTitle().setFont(new Font("Poppins", Font.PLAIN, 18));
-        pieChart.getTitle().setHorizontalAlignment(HorizontalAlignment.LEFT);
-        pieChart.getTitle().setPadding(0, 10, 5, 0);
-        ChartPanel piePanel = new ChartPanel(pieChart);
-
-        PiePlot piePlot = (PiePlot) pieChart.getPlot();
-        piePlot.setSectionPaint("19h - Reduz 62%", new Color(33, 150, 243));
-        piePlot.setSectionPaint("18h - Reduz 82%", new Color(255, 152, 0));
-        piePlot.setSectionPaint("20h - Reduz 75%", new Color(255, 87, 34));
-
-        pieChart.getPlot().setBackgroundPaint(Color.WHITE);
-        pieChart.getPlot().setOutlineVisible(false);
-        
-        piePlot.setLabelGenerator(null);  
-        piePlot.setLabelLinksVisible(false); 
-
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weighty = 0.3;
-        gbc.insets = new Insets(0, 50, 30, 50);
-        add(piePanel, gbc);
-
-        // Gráfico de Predições de Consumo Futuro 
-        DefaultPieDataset futureDataset = new DefaultPieDataset();
-        futureDataset.setValue("Tarde", 32);
-        futureDataset.setValue("Noite", 40);
-        futureDataset.setValue("Manhã", 28);
-
-        JFreeChart futureChart = ChartFactory.createRingChart(
-                "", futureDataset, true, true, false);
-        futureChart.getTitle().setFont(new Font("Poppins", Font.PLAIN, 18));
-        futureChart.getTitle().setHorizontalAlignment(HorizontalAlignment.LEFT);
-        futureChart.getTitle().setPadding(0, 10, 5, 0);
-
-        ChartPanel futurePanel = new ChartPanel(futureChart);
-        gbc.gridx = 1;
-        gbc.gridy = 6;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.insets = new Insets(0, 0, 30, 0);
-        add(futurePanel, gbc);
-
-        PiePlot futurePlot = (PiePlot) futureChart.getPlot();
-        futurePlot.setSectionPaint("Tarde", new Color(255, 152, 0));
-        futurePlot.setSectionPaint("Noite", new Color(255, 193, 7));
-        futurePlot.setSectionPaint("Manhã", new Color(255, 235, 59));
-
-        futurePlot.setLabelGenerator(new StandardPieSectionLabelGenerator("{2}"));
-        futurePlot.setLabelFont(new Font("Poppins", Font.PLAIN, 12));
-        futurePlot.setLabelBackgroundPaint(Color.WHITE);
-
-        futureChart.getPlot().setBackgroundPaint(Color.WHITE);
-        futureChart.getPlot().setOutlineVisible(false);
 
         //Botões
         JButton button1 = new JButton("ACEITAR SUGESTÃO");

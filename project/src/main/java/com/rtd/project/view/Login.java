@@ -54,7 +54,7 @@ public class Login extends JFrame {
         loginGbc.gridy = 2;
         loginPanel.add(userLabel, loginGbc);
 
-        JTextField userField = new JTextField("", 15);
+        JTextField userField = new JTextField("tulio.melo@renault.com", 15);
         userField.setFont(fieldFont);
         userField.setForeground(Color.GRAY);
         loginGbc.gridx = 1;
@@ -66,7 +66,7 @@ public class Login extends JFrame {
         loginGbc.gridy = 3;
         loginPanel.add(passwordLabel, loginGbc);
 
-        JPasswordField passwordField = new JPasswordField("", 15);
+        JPasswordField passwordField = new JPasswordField("12345", 15);
         passwordField.setFont(fieldFont);
         passwordField.setForeground(Color.GRAY);
         loginGbc.gridx = 1;
