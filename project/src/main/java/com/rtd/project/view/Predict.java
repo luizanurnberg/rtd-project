@@ -17,6 +17,11 @@ import org.jfree.chart.ui.HorizontalAlignment;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import java.awt.event.ActionEvent;
+import feign.Feign;
+import feign.jackson.JacksonDecoder;
+import feign.jackson.JacksonEncoder;
+import feign.okhttp.OkHttpClient;
+
 
 public class Predict extends JFrame {
     private ArduinoClient arduinoClient;
@@ -30,6 +35,12 @@ public class Predict extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(10, 10, 10, 10);
+
+        arduinoClient = Feign.builder()
+                .client(new OkHttpClient())
+                .encoder(new JacksonEncoder())
+                .decoder(new JacksonDecoder())
+                .target(ArduinoClient.class, "http://192.168.4.1");
 
         getContentPane().setBackground(Color.WHITE);
 
@@ -312,7 +323,7 @@ public class Predict extends JFrame {
         button2.addActionListener((ActionEvent e) -> {
 
             try {
-                arduinoClient.turnOnLed();
+                arduinoClient.turnOffLed();
                 JOptionPane.showMessageDialog(null, "Controle automático ativado e LED desligado no Arduino!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao se comunicar com o Arduino", "Erro", JOptionPane.ERROR_MESSAGE);

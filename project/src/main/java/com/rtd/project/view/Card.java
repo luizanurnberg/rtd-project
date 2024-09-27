@@ -1,12 +1,14 @@
 package com.rtd.project.view;
 
 import com.rtd.project.service.ArduinoClient;
-import org.springframework.beans.factory.annotation.Autowired;
+import feign.Feign;
+import feign.jackson.JacksonDecoder;
+import feign.jackson.JacksonEncoder;
+import feign.okhttp.OkHttpClient;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public final class Card extends JPanel {
     private ImageIcon icon;
@@ -19,7 +21,6 @@ public final class Card extends JPanel {
     private String responsavel;
     private String energia;
 
-    @Autowired
     private ArduinoClient arduinoClient;
 
     public Card(ImageIcon icon, boolean status, int idMaquina, String nomeMaquina,String horario, String responsavel, String energia) {
@@ -30,6 +31,11 @@ public final class Card extends JPanel {
         this.horario = horario;
         this.responsavel = responsavel;
         this.energia = energia;
+        arduinoClient = Feign.builder()
+                .client(new OkHttpClient())
+                .encoder(new JacksonEncoder())
+                .decoder(new JacksonDecoder())
+                .target(ArduinoClient.class, "http://192.168.4.1");
         setOpaque(false);
         Font font = new Font("Arial", Font.BOLD, 15);
 
@@ -157,6 +163,5 @@ public final class Card extends JPanel {
 
         g2d.drawImage(scaledIcon.getImage(), iconX, iconY, null);
         g2d.drawString(nomeMaquina, textX, textY);
-
     }
 }
