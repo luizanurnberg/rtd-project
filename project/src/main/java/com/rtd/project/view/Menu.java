@@ -44,7 +44,7 @@ public class Menu extends JFrame {
 
         int buttonX = (totalWidth - (buttonWidth * 2 + horizontalSpacing)) / 2;
 
-        RoundedButton predictButton = new RoundedButton(getClass().getClassLoader().getResource("static/predictIcon.png").getPath(), "Predições");
+        RoundedButton predictButton = new RoundedButton(getClass().getClassLoader().getResource("static/predictIcon.png").getPath(), "Painel de decisões");
         predictButton.setBounds((2000 - (buttonWidth * 3 + horizontalSpacing)) / 3, 330, buttonWidth, buttonHeight);
         predictButton.addMouseListener(new MouseAdapter() {
         @Override

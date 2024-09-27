@@ -7,22 +7,24 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 public final class Card extends JPanel {
     private ImageIcon icon;
-    private JButton button;
+    private JButton buttonToggle;
     private boolean status;
     private int idMaquina;
     private String nomeMaquina;
-    private String text;
     private String horario;
     private String responsavel;
     private String energia;
 
-    @Autowired
+    private JLabel labelHorarioFuncionamento;
+    private JLabel horarioFuncionamento;
     private ArduinoClient arduinoClient;
+    private int horasFuncionamento;
 
-    public Card(ImageIcon icon, boolean status, int idMaquina, String nomeMaquina,String horario, String responsavel, String energia) {
+    public Card(ImageIcon icon, boolean status, int idMaquina, String nomeMaquina, String horario, String responsavel, String energia) {
         this.icon = icon;
         this.status = status;
         this.idMaquina = idMaquina;
@@ -30,29 +32,14 @@ public final class Card extends JPanel {
         this.horario = horario;
         this.responsavel = responsavel;
         this.energia = energia;
+
+        Random random = new Random();
+        this.horasFuncionamento = random.nextInt(6) + 1;
+
         setOpaque(false);
         Font font = new Font("Arial", Font.BOLD, 15);
-
-        setText(status);
-        JButton buttoncard = new JButton(text);
-        buttoncard.setBackground(new Color(230, 230, 230));
-        buttoncard.setForeground(Color.BLACK);
-        buttoncard.setFont(font);
-        buttoncard.setOpaque(true);
-        buttoncard.setBounds(105, 345, 100, 30);
-        buttoncard.setFocusPainted(false);
-        buttoncard.setBorder(BorderFactory.createEmptyBorder());
-
-        add(buttoncard);
-
-        buttoncard.addActionListener((ActionEvent e) -> {
-            setStatus(status);
-            setText(getStatus());
-            buttoncard.setText(text);
-            sendRequestArduino();
-        });
-
         setLayout(null);
+
         JLabel label1 = new JLabel("ID Máquina:");
         label1.setFont(font);
         label1.setForeground(Color.BLACK);
@@ -77,19 +64,21 @@ public final class Card extends JPanel {
         responsavelMaquina.setBounds(40, 172, 200, 30);
         add(responsavelMaquina);
 
-        JLabel lable3 = new JLabel("Horário de Funcionamento:");
+        JLabel lable3 = new JLabel("");
         lable3.setFont(font);
         lable3.setForeground(Color.BLACK);
         lable3.setBounds(40, 210, 200, 20);
         add(lable3);
 
-        JLabel horarioFuncionamento = new JLabel(horario);
+        this.labelHorarioFuncionamento = lable3;
+
+        horarioFuncionamento = new JLabel(horario);
         horarioFuncionamento.setFont(font);
         horarioFuncionamento.setForeground(Color.BLACK);
         horarioFuncionamento.setBounds(40, 232, 200, 20);
         add(horarioFuncionamento);
 
-        JLabel lable4 = new JLabel("Energia Consumida:");
+        JLabel lable4 = new JLabel("Consumo médio (15 minutos):");
         lable4.setFont(font);
         lable4.setForeground(Color.BLACK);
         lable4.setBounds(40, 262, 200, 20);
@@ -100,25 +89,32 @@ public final class Card extends JPanel {
         energiaConsumida.setForeground(Color.BLACK);
         energiaConsumida.setBounds(40, 284, 200, 20);
         add(energiaConsumida);
+
+        buttonToggle = new JButton(status ? "Desligar" : "Ligar");
+        buttonToggle.setBackground(status ? new Color(255, 0, 0) : new Color(0, 255, 0));
+        buttonToggle.setForeground(Color.BLACK);
+        buttonToggle.setFont(font);
+        buttonToggle.setBounds(40, 345, 150, 30);
+        buttonToggle.setFocusPainted(false);
+        buttonToggle.setBorder(BorderFactory.createEmptyBorder());
+        add(buttonToggle);
+
+        buttonToggle.addActionListener((ActionEvent e) -> {
+            toggleMaquina();
+        });
     }
 
-    public void setStatus(boolean status) {
-        this.status = !status;
+    private void toggleMaquina() {
+        this.status = !this.status;
+
+        buttonToggle.setText(status ? "Desligar" : "Ligar");
+        buttonToggle.setBackground(status ? new Color(255, 0, 0) : new Color(0, 255, 0));
+        labelHorarioFuncionamento.setText(status ? "Tempo Desligada: " + horasFuncionamento + " horas" : "Tempo Ligada: " + horasFuncionamento + " horas");
+
+        sendRequestArduino();
     }
 
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setText(boolean status) {
-        if(status){
-            this.text = "Ligada";
-        }else {
-            this.text = "Desligada";
-        }
-    }
-
-    private void sendRequestArduino(){
+    private void sendRequestArduino() {
         try {
             if (status) {
                 arduinoClient.turnOnLed();
