@@ -7,7 +7,7 @@
 
 Repositório referente ao projeto para o Renault Transformation Day
 
-###### Desenvolvedores: Gustavo Avelar, Luiz Portela, Luíza Nurnberg e Maria Cecilia Holler
+###### Desenvolvedores: Equipe UDESCoders
 
 ![Em Desenvolvimento](https://img.shields.io/badge/Status-Em_Desenvolvimento-green)
 
