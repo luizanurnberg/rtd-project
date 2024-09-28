@@ -123,10 +123,10 @@ public final class Card extends JPanel {
     private void sendRequestArduino() {
         try {
             if (status) {
-                arduinoClient.turnOnLed();
+                arduinoClient.turnOnLed("2");
                 JOptionPane.showMessageDialog(null, "Máquina Ligada e LED LIGADO no Arduino!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                arduinoClient.turnOffLed();
+                arduinoClient.turnOffLed("2");
                 JOptionPane.showMessageDialog(null, "Máquina Desligada e LED DESLIGADO no Arduino!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception ex) {

@@ -1,11 +1,13 @@
 package com.rtd.project.service;
 
+import feign.Param;
 import feign.RequestLine;
+import feign.Response;
 
 public interface ArduinoClient {
-    @RequestLine("GET /LED=ON")
-    void turnOnLed();
+    @RequestLine("GET /MODE=ON&LED={led}")
+    void turnOnLed(@Param("led") String led);
 
-    @RequestLine("GET /LED=OFF")
-    void turnOffLed();
+    @RequestLine("GET /MODE=OFF&LED={led}")
+    void turnOffLed(@Param("led") String led);
 }

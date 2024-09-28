@@ -26,6 +26,7 @@ import feign.okhttp.OkHttpClient;
 
 public class Predict extends JFrame {
     private ArduinoClient arduinoClient;
+    private Thread ledThread;
 
     public Predict() {
         setTitle("DashBoard");
@@ -264,7 +265,7 @@ public class Predict extends JFrame {
         button1.addActionListener((ActionEvent e) -> {
 
             try {
-                arduinoClient.turnOnLed();
+                arduinoClient.turnOnLed("1");
                 JOptionPane.showMessageDialog(null, "Sugestão aceita e LED ligado no Arduino!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Erro ao se comunicar com o Arduino", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -273,11 +274,30 @@ public class Predict extends JFrame {
 
         button2.addActionListener((ActionEvent e) -> {
 
-            try {
-                arduinoClient.turnOffLed();
-                JOptionPane.showMessageDialog(null, "Controle automático ativado e LED desligado no Arduino!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao se comunicar com o Arduino", "Erro", JOptionPane.ERROR_MESSAGE);
+            if (ledThread != null && ledThread.isAlive()) {
+                // If the thread is running, interrupt it to stop the current task
+                ledThread.interrupt();
+                System.out.println("Previous task interrupted.");
+            } else {
+                // Start the task in a new thread
+                Runnable ledTask = () -> {
+                    try {
+                        while (!Thread.currentThread().isInterrupted()) {
+                            arduinoClient.turnOnLed("3");
+                            Thread.sleep(5000);  // Sleep for 5 seconds
+                            arduinoClient.turnOffLed("3");
+                            Thread.sleep(5000);
+                        }
+                    } catch (InterruptedException e1) {
+                        Thread.currentThread().interrupt();  // Restore the interrupted status
+                        System.out.println("Thread interrupted, stopping the task.");
+                    }
+                };
+
+                // Start the new task
+                ledThread = new Thread(ledTask);
+                ledThread.start();
+                System.out.println("New task started.");
             }
         });
 
