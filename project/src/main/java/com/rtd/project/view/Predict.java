@@ -208,7 +208,7 @@ public class Predict extends JFrame {
         gbc.insets = new Insets(0, 25, 0, 50);
         add(linePanel, gbc);
 
-        JLabel text3 = new JLabel("Sugestão de desligamento");
+        JLabel text3 = new JLabel("Sugestão de ligamento/desligamento");
         text3.setFont(new Font("Poppins", Font.PLAIN, 14));
         gbc.gridx = 0;
         gbc.gridy = 4;
@@ -219,7 +219,7 @@ public class Predict extends JFrame {
         gbc.insets = new Insets(0, 55, 0, 0);
         add(text3, gbc);
         
-        JLabel sugest1 = new JLabel("19h: redução de 75% (11,7kW)");
+        JLabel sugest1 = new JLabel("18h: redução de 82% (14kW) ");
         sugest1.setFont(new Font("Arial", Font.PLAIN, 15));
         gbc.gridx = 0;
         gbc.gridy = 7;
@@ -232,7 +232,7 @@ public class Predict extends JFrame {
         gbc.insets = new Insets(20, 55, 10, 10); 
         add(sugest1, gbc);
 
-        JButton buttonSugest1 = new JButton("Programar Desligamento");
+        JButton buttonSugest1 = new JButton("Programar Ligamento");
         buttonSugest1.setBackground(new Color(33, 150, 243));
         buttonSugest1.setForeground(Color.WHITE);
         buttonSugest1.setBorder(new LineBorder(new Color(33, 150, 243), 5));
@@ -338,7 +338,7 @@ public class Predict extends JFrame {
         gbc.insets = new Insets(0, 55, 0, 0);
         add(text4, gbc);
 
-        JLabel text3cont = new JLabel("Baseado nas predições de consumo, desligar às 18h para reduzir o consumo noturno");
+        JLabel text3cont = new JLabel("Baseado nas predições de consumo, o início do ligamento/desligamento automático às 18h pode reduzir o consumo noturno");
         text3cont.setFont(new Font("Poppins", Font.PLAIN, 10));
 
         gbc.gridx = 0;
@@ -364,10 +364,9 @@ public class Predict extends JFrame {
         add(text4cont, gbc);
 
         //Botões
-        JButton button1 = new JButton("ACEITAR SUGESTÃO");
         JButton button2 = new JButton("CONTROLE AUTOMÁTICO");
 
-        button1.addActionListener((ActionEvent e) -> {
+        buttonSugest1.addActionListener((ActionEvent e) -> {
 
             try {
                 arduinoClient.turnOnLed("1");
@@ -406,24 +405,9 @@ public class Predict extends JFrame {
             }
         });
 
-        button1.setBackground(new Color(33, 150, 243));
-        button1.setForeground(Color.WHITE);
-        button1.setBorder(new LineBorder(new Color(33, 150, 243), 5));
-
         button2.setBackground(new Color(255, 87, 34));
         button2.setForeground(Color.WHITE);
         button2.setBorder(new LineBorder(new Color(255, 87, 34), 5));
-
-        gbc.gridx = 0;
-        gbc.gridy = 11;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        gbc.weightx = 0.0;
-        gbc.weighty = 0.0;
-        gbc.insets = new Insets(5, 0, 30, 5);
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.NONE;
-        add(button1, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 11;
@@ -442,7 +426,7 @@ public class Predict extends JFrame {
         footerLabel.setForeground(Color.BLACK);
 
         gbc.gridx = 0;
-        gbc.gridy = 12;
+        gbc.gridy = 11;
         gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbc.weightx = 1.0;
