@@ -2,6 +2,8 @@ package com.rtd.project.view;
 
 import javax.swing.*;
 import java.awt.*;
+
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import com.rtd.project.service.ArduinoClient;
@@ -326,7 +328,7 @@ public class Predict extends JFrame {
         add(buttonSugest4, gbc);
         
 
-        JLabel text4 = new JLabel("Predições de Consumo Futuro");
+        JLabel text4 = new JLabel("Sugestão de Funcionamento Automático");
         text4.setFont(new Font("Poppins", Font.PLAIN, 14));
 
         gbc.gridx = 1;
@@ -337,9 +339,54 @@ public class Predict extends JFrame {
         gbc.weighty = 0;
         gbc.insets = new Insets(0, 55, 0, 0);
         add(text4, gbc);
+        
+        JPanel colunasPanel = new JPanel(new GridBagLayout());
+        colunasPanel.setBackground(Color.WHITE);
+        colunasPanel.setBorder(new EmptyBorder(0, 0, 0, 20));
+        GridBagConstraints colGbc = new GridBagConstraints();
+        colGbc.fill = GridBagConstraints.HORIZONTAL;
+        colGbc.insets = new Insets(5, 5, 5, 5);
 
-        JLabel text3cont = new JLabel("Baseado nas predições de consumo, o início do ligamento/desligamento automático às 18h pode reduzir o consumo noturno");
-        text3cont.setFont(new Font("Poppins", Font.PLAIN, 10));
+        String[] textos = {
+            "3h45 - 23h15: com redução de 2%",
+            "4h30 - 23h15: com redução de 8%",
+            "5h50 - 23h15: com redução de 12%"
+        };
+
+        for (int i = 0; i < textos.length; i++) {
+            
+            JLabel colunaTexto = new JLabel(textos[i]);
+            colunaTexto.setFont(new Font("Poppins", Font.PLAIN, 12));
+            
+            colGbc.gridx = 0;
+            colGbc.gridy = i;
+            colGbc.weightx = 0.8;
+            colGbc.fill = GridBagConstraints.HORIZONTAL;
+            colunasPanel.add(colunaTexto, colGbc);
+
+            JButton botaoControle = new JButton("Controle Automático");
+            botaoControle.setBackground(new Color(255, 87, 34));
+            botaoControle.setForeground(Color.WHITE);
+            botaoControle.setBorder(new LineBorder(new Color(255, 87, 34), 5));
+            botaoControle.setPreferredSize(new Dimension(150, 30));
+            botaoControle.addActionListener((ActionEvent e) -> btControleAutomatico());
+            
+            colGbc.gridx = 1;
+            colGbc.weightx = 0;
+            colGbc.fill = GridBagConstraints.NONE;
+            colunasPanel.add(botaoControle, colGbc);
+        }
+
+
+        gbc.gridx = 1;
+        gbc.gridy = 6;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        add(colunasPanel, gbc);
+
+
+        JLabel text3cont = new JLabel("Baseado nas predições de consumo, desligar às 18h para reduzir o consumo noturno");
+        text3cont.setFont(new Font("Poppins", Font.PLAIN, 11));
 
         gbc.gridx = 0;
         gbc.gridy = 5;
@@ -352,7 +399,7 @@ public class Predict extends JFrame {
         add(text3cont, gbc);
 
         JLabel text4cont = new JLabel("1-6 Ago, 2024");
-        text4cont.setFont(new Font("Poppins", Font.PLAIN, 10));
+        text4cont.setFont(new Font("Poppins", Font.PLAIN, 11));
         gbc.gridx = 1;
         gbc.gridy = 5;
         gbc.gridwidth = 2;
@@ -364,7 +411,7 @@ public class Predict extends JFrame {
         add(text4cont, gbc);
 
         //Botões
-        JButton button2 = new JButton("CONTROLE AUTOMÁTICO");
+        JButton button1 = new JButton("Aceitar Sugestão");
 
         buttonSugest1.addActionListener((ActionEvent e) -> {
 
@@ -376,49 +423,24 @@ public class Predict extends JFrame {
             }
         });
 
-        button2.addActionListener((ActionEvent e) -> {
 
-            if (ledThread != null && ledThread.isAlive()) {
-                // If the thread is running, interrupt it to stop the current task
-                ledThread.interrupt();
-                System.out.println("Previous task interrupted.");
-            } else {
-                // Start the task in a new thread
-                Runnable ledTask = () -> {
-                    try {
-                        while (!Thread.currentThread().isInterrupted()) {
-                            arduinoClient.turnOnLed("3");
-                            Thread.sleep(5000);  // Sleep for 5 seconds
-                            arduinoClient.turnOffLed("3");
-                            Thread.sleep(5000);
-                        }
-                    } catch (InterruptedException e1) {
-                        Thread.currentThread().interrupt();  // Restore the interrupted status
-                        System.out.println("Thread interrupted, stopping the task.");
-                    }
-                };
 
-                // Start the new task
-                ledThread = new Thread(ledTask);
-                ledThread.start();
-                System.out.println("New task started.");
-            }
-        });
+        button1.setBackground(new Color(33, 150, 243));
+        button1.setForeground(Color.WHITE);
+        button1.setBorder(new LineBorder(new Color(33, 150, 243), 5));
 
-        button2.setBackground(new Color(255, 87, 34));
-        button2.setForeground(Color.WHITE);
-        button2.setBorder(new LineBorder(new Color(255, 87, 34), 5));
+        gbc.gridx = 0;
+        gbc.gridy = 6;
 
-        gbc.gridx = 1;
-        gbc.gridy = 11;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 0.0;
         gbc.weighty = 0.0;
-        gbc.insets = new Insets(5, 5, 30, 50);
+
+        gbc.insets = new Insets(5, 50, 5, 100);
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
-        add(button2, gbc);
+        add(button1, gbc);
 
         //Footer
         JLabel footerLabel = new JLabel("Copyright Renault. All rights reserved", JLabel.CENTER);
@@ -431,7 +453,7 @@ public class Predict extends JFrame {
         gbc.gridheight = 1;
         gbc.weightx = 1.0;
         gbc.weighty = 0.0;
-        gbc.insets = new Insets(0, 0, 20, 0);
+        gbc.insets = new Insets(10, 0, 20, 0);
         gbc.anchor = GridBagConstraints.PAGE_END;
         add(footerLabel, gbc);
 
@@ -446,6 +468,34 @@ public class Predict extends JFrame {
             Predict dashboard = new Predict();
             dashboard.showPredict();
         });
+    }
+    
+    private void btControleAutomatico() {
+    	if (ledThread != null && ledThread.isAlive()) {
+            // If the thread is running, interrupt it to stop the current task
+            ledThread.interrupt();
+            System.out.println("Previous task interrupted.");
+        } else {
+            // Start the task in a new thread
+            Runnable ledTask = () -> {
+                try {
+                    while (!Thread.currentThread().isInterrupted()) {
+                        arduinoClient.turnOnLed("3");
+                        Thread.sleep(5000);  // Sleep for 5 seconds
+                        arduinoClient.turnOffLed("3");
+                        Thread.sleep(5000);
+                    }
+                } catch (InterruptedException e1) {
+                    Thread.currentThread().interrupt();  // Restore the interrupted status
+                    System.out.println("Thread interrupted, stopping the task.");
+                }
+            };
+
+            // Start the new task
+            ledThread = new Thread(ledTask);
+            ledThread.start();
+            System.out.println("New task started.");
+        }
     }
 
 }
