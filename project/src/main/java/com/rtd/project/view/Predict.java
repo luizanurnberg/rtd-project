@@ -48,10 +48,31 @@ public class Predict extends JFrame {
 
         getContentPane().setBackground(Color.WHITE);
 
-        //Header
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(new Dimension(2000, 100));
         layeredPane.setBackground(new Color(255, 255, 255));
+        JPanel maquinasPanel = new JPanel();
+        maquinasPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 5));
+        maquinasPanel.setOpaque(false);
+
+        String[] maquinas = {"Máquina 1", "Máquina 2", "Máquina 3"};
+        JComboBox<String> maquinasComboBox = new JComboBox<>(maquinas);
+        maquinasComboBox.setSelectedIndex(1);
+        maquinasComboBox.setFont(new Font("Poppins", Font.PLAIN, 14));
+        maquinasComboBox.setPreferredSize(new Dimension(150, 25));
+        maquinasComboBox.setBackground(Color.WHITE);
+
+        maquinasPanel.add(maquinasComboBox);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.0;
+        gbc.weighty = 0.0;
+        gbc.insets = new Insets(-80, 5, 0, 0);
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        add(maquinasPanel, gbc);
 
         ImageIcon logoIcon = new ImageIcon(getClass().getClassLoader().getResource("static/renaultLogoHeader.png").getPath());
         Image scaledLogo = logoIcon.getImage().getScaledInstance(2000, 80, Image.SCALE_SMOOTH);
