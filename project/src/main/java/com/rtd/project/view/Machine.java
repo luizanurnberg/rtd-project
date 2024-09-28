@@ -75,7 +75,7 @@ public class Machine extends JFrame {
             JButton backButton = new JButton("Voltar");
             backButton.setBackground(new Color(211, 211, 211));
             backButton.setFont(buttonFont);
-            backButton.setBounds(10, 100, 100, 30);
+            backButton.setBounds(50, 100, 60, 25);
             backButton.setFocusPainted(false);
             backButton.setBorder(BorderFactory.createEmptyBorder());
             layeredPane.add(backButton, Integer.valueOf(2));
