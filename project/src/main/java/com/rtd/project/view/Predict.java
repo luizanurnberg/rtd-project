@@ -81,7 +81,7 @@ public class Predict extends JFrame {
         JButton backButton = new JButton("Voltar");
         backButton.setBackground(new Color(211, 211, 211));
         backButton.setFont(buttonFont);
-        backButton.setBounds(10, 100, 100, 30);
+        backButton.setBounds( 50, 90, 60, 25);
         backButton.setFocusPainted(false);
         backButton.setBorder(BorderFactory.createEmptyBorder());
         layeredPane.add(backButton, Integer.valueOf(2));
@@ -175,8 +175,7 @@ public class Predict extends JFrame {
         gbc.weighty = 0.3;
         gbc.insets = new Insets(0, 50, 10, 25);
         add(barChartPanel, gbc);
-
-        // Gráfico de Status das Máquinas (Linha)
+        
         DefaultCategoryDataset statusDataset = new DefaultCategoryDataset();
         statusDataset.addValue(2, "Atual", "01");
         statusDataset.addValue(3, "Atual", "02");
@@ -218,8 +217,114 @@ public class Predict extends JFrame {
         gbc.weightx = 0.1;
         gbc.weighty = 0;
         gbc.insets = new Insets(0, 55, 0, 0);
-
         add(text3, gbc);
+        
+        JLabel sugest1 = new JLabel("19h: redução de 75% (11,7kW)");
+        sugest1.setFont(new Font("Arial", Font.PLAIN, 15));
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0; 
+        gbc.weighty = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.insets = new Insets(20, 55, 10, 10); 
+        add(sugest1, gbc);
+
+        JButton buttonSugest1 = new JButton("Programar Desligamento");
+        buttonSugest1.setBackground(new Color(33, 150, 243));
+        buttonSugest1.setForeground(Color.WHITE);
+        buttonSugest1.setBorder(new LineBorder(new Color(33, 150, 243), 5));
+        gbc.gridx = 0; 
+        gbc.gridy = 7;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0; 
+        gbc.weighty = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.NONE; 
+        gbc.insets = new Insets(20, 300, 10, 0);
+        add(buttonSugest1, gbc);
+        
+        JLabel sugest2 = new JLabel("19h: redução de 75% (11,7kW)");
+        sugest2.setFont(new Font("Arial", Font.PLAIN, 15));
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0;
+        gbc.insets = new Insets(10, 55, 10, 0);
+        add(sugest2, gbc);
+        
+        JButton buttonSugest2 = new JButton("Programar Desligamento");
+        buttonSugest2.setBackground(new Color(33, 150, 243));
+        buttonSugest2.setForeground(Color.WHITE);
+        buttonSugest2.setBorder(new LineBorder(new Color(33, 150, 243), 5));
+        gbc.gridx = 0; 
+        gbc.gridy = 8;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0; 
+        gbc.weighty = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.NONE; 
+        gbc.insets = new Insets(10, 300, 10, 0);
+        add(buttonSugest2, gbc);
+        
+        JLabel sugest3 = new JLabel("20h: redução de 62% (9,6kW)");
+        sugest3.setFont(new Font("Arial", Font.PLAIN, 15));
+        gbc.gridx = 0;
+        gbc.gridy = 9;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0;
+        gbc.insets = new Insets(10, 55, 10, 0);
+        add(sugest3, gbc);
+        
+        JButton buttonSugest3 = new JButton("Programar Desligamento");
+        buttonSugest3.setBackground(new Color(33, 150, 243));
+        buttonSugest3.setForeground(Color.WHITE);
+        buttonSugest3.setBorder(new LineBorder(new Color(33, 150, 243), 5));
+        gbc.gridx = 0; 
+        gbc.gridy = 9;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0; 
+        gbc.weighty = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.NONE; 
+        gbc.insets = new Insets(10, 300, 10, 0);
+        add(buttonSugest3, gbc);
+        
+        JLabel sugest4 = new JLabel("21h: risco de pane!");
+        sugest4.setFont(new Font("Arial", Font.PLAIN, 15));
+        gbc.gridx = 0;
+        gbc.gridy = 10;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0.1;
+        gbc.weighty = 0;
+        gbc.insets = new Insets(10, 55, 10, 0);
+        add(sugest4, gbc);
+        
+        JButton buttonSugest4 = new JButton("Programar Desligamento");
+        buttonSugest4.setBackground(new Color(33, 150, 243));
+        buttonSugest4.setForeground(Color.WHITE);
+        buttonSugest4.setBorder(new LineBorder(new Color(33, 150, 243), 5));
+        gbc.gridx = 0; 
+        gbc.gridy = 10;
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.weightx = 0; 
+        gbc.weighty = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.NONE; 
+        gbc.insets = new Insets(10, 300, 10, 0);
+        add(buttonSugest4, gbc);
+        
 
         JLabel text4 = new JLabel("Predições de Consumo Futuro");
         text4.setFont(new Font("Poppins", Font.PLAIN, 14));
@@ -310,7 +415,7 @@ public class Predict extends JFrame {
         button2.setBorder(new LineBorder(new Color(255, 87, 34), 5));
 
         gbc.gridx = 0;
-        gbc.gridy = 7;
+        gbc.gridy = 11;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 0.0;
@@ -321,7 +426,7 @@ public class Predict extends JFrame {
         add(button1, gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 7;
+        gbc.gridy = 11;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 0.0;
@@ -337,7 +442,7 @@ public class Predict extends JFrame {
         footerLabel.setForeground(Color.BLACK);
 
         gbc.gridx = 0;
-        gbc.gridy = 8;
+        gbc.gridy = 12;
         gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbc.weightx = 1.0;
