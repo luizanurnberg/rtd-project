@@ -166,16 +166,16 @@ public class Predict extends JFrame {
         gbc.insets = new Insets(0, 55, 0, 0);
         add(text2legend, gbc);
 
-        // Gráfico de Consumo (Barras)
+// Gráfico de Consumo (Barras)
         DefaultCategoryDataset consumoDataset = new DefaultCategoryDataset();
-        consumoDataset.addValue(2, "Últimos 6 dias", "01");
-        consumoDataset.addValue(4, "Últimos 6 dias", "02");
-        consumoDataset.addValue(3, "Últimos 6 dias", "03");
-        consumoDataset.addValue(5, "Últimos 6 dias", "04");
-        consumoDataset.addValue(4, "Última semana", "01");
-        consumoDataset.addValue(3, "Última semana", "02");
-        consumoDataset.addValue(2, "Última semana", "03");
-
+        consumoDataset.addValue(2, "Últimos dias", "01");
+        consumoDataset.addValue(4, "Últimos dias", "02");
+        consumoDataset.addValue(3, "Últimos dias", "03");
+        consumoDataset.addValue(5, "Últimos dias", "04");
+        consumoDataset.addValue(4, "Mês anterior", "01");
+        consumoDataset.addValue(3, "Mês anterior", "02");
+        consumoDataset.addValue(2, "Mês anterior", "03");
+        
         JFreeChart barChart = ChartFactory.createBarChart(
                 "Gráfico de Consumo", "", "", consumoDataset);
         barChart.getTitle().setFont(new Font("Poppins", Font.BOLD, 18));

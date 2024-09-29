@@ -11,7 +11,7 @@ public class Login extends JFrame {
         setTitle("Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setUndecorated(true);
+        setUndecorated(false);
 
         BackgroundPanel backgroundPanel = new BackgroundPanel(
                 getClass().getClassLoader().getResource("static/background.png").getPath());

@@ -84,7 +84,7 @@ public final class Card extends JPanel {
         horarioFuncionamento.setBounds(40, 232, 200, 20);
         add(horarioFuncionamento);
 
-        JLabel lable4 = new JLabel("Consumo médio (15 minutos):");
+        JLabel lable4 = new JLabel("Consumo médio (15 min):");
         lable4.setFont(font);
         lable4.setForeground(Color.BLACK);
         lable4.setBounds(40, 262, 200, 20);
