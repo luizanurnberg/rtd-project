@@ -24,6 +24,14 @@ import feign.Feign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import feign.okhttp.OkHttpClient;
+import java.text.FieldPosition;
+import java.text.NumberFormat;
+import java.text.ParsePosition;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.IntervalBarRenderer;
+import org.jfree.data.category.DefaultIntervalCategoryDataset;
 
 
 public class Predict extends JFrame {
@@ -64,13 +72,13 @@ public class Predict extends JFrame {
 
         maquinasPanel.add(maquinasComboBox);
 
-        gbc.gridx = 0;
+        gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.weightx = 0.0;
         gbc.weighty = 0.0;
-        gbc.insets = new Insets(-80, 5, 0, 0);
+        gbc.insets = new Insets(-40, 500, 0, 0);
         gbc.anchor = GridBagConstraints.NORTHWEST;
         add(maquinasPanel, gbc);
 
@@ -150,7 +158,7 @@ public class Predict extends JFrame {
         gbc.insets = new Insets(0, 55, 0, 0);
         add(text1legend, gbc);
 
-        JLabel text2legend = new JLabel("1-6 Ago, 2024");
+        JLabel text2legend = new JLabel("1-7 Ago, 2024");
         text2legend.setFont(new Font("Poppins", Font.PLAIN, 10));
 
         gbc.gridx = 1;
@@ -199,38 +207,88 @@ public class Predict extends JFrame {
         gbc.insets = new Insets(0, 50, 10, 25);
         add(barChartPanel, gbc);
 
-        DefaultCategoryDataset statusDataset = new DefaultCategoryDataset();
-        statusDataset.addValue(2, "Atual", "01");
-        statusDataset.addValue(3, "Atual", "02");
-        statusDataset.addValue(5, "Atual", "03");
-        statusDataset.addValue(1, "Atual", "04");
-        statusDataset.addValue(3, "Semana passada", "01");
-        statusDataset.addValue(4, "Semana passada", "02");
-        statusDataset.addValue(2, "Semana passada", "03");
+        //Gráfico 2
+        Number[] startTimes = {4, 5, 6, 0, 5, 6, 6};
+        Number[] endTimes = {23, 22, 24, 0, 24, 21, 22};
 
-        JFreeChart lineChart = ChartFactory.createLineChart(
-                "", "", "",
-                statusDataset);
-        lineChart.getTitle().setFont(new Font("Poppins", Font.PLAIN, 18));
-        lineChart.getTitle().setHorizontalAlignment(HorizontalAlignment.LEFT);
-        lineChart.getTitle().setPadding(0, 60, 0, 0);
-        ChartPanel linePanel = new ChartPanel(lineChart);
+        Number[][] durations = new Number[1][startTimes.length];
 
-        CategoryPlot linePlot = lineChart.getCategoryPlot();
-        LineAndShapeRenderer lineRenderer = (LineAndShapeRenderer) linePlot.getRenderer();
-        lineRenderer.setSeriesPaint(0, new Color(255, 193, 7));
-        lineRenderer.setSeriesPaint(1, new Color(96, 96, 96));
+        String[] days = new String[7];
+        for (int i = 0; i < 7; i++) {
+            days[i] = String.format("%02d", i + 1); 
+        }
 
-        lineChart.getPlot().setBackgroundPaint(Color.WHITE);
-        lineChart.getPlot().setOutlineVisible(false);
+        for (int i = 0; i < startTimes.length; i++) {
+            durations[0][i] = endTimes[i].doubleValue() - startTimes[i].doubleValue();
+        }
+
+        DefaultIntervalCategoryDataset dataset = new DefaultIntervalCategoryDataset(
+            new String[] {"Horário de Operação"}, 
+            days,
+            new Number[][] {startTimes},  
+            new Number[][] {endTimes}     
+        );
+
+
+
+        JFreeChart chart = ChartFactory.createStackedBarChart(
+            "Horários de Funcionamento",  
+            "",  
+            "",  
+            dataset,  
+            PlotOrientation.HORIZONTAL,  
+            true,  
+            false,  
+            false  
+        );
+
+        chart.getTitle().setFont(new Font("Poppins", Font.BOLD, 18));
+        chart.getTitle().setHorizontalAlignment(HorizontalAlignment.LEFT);
+        chart.getTitle().setPadding(10, 20, 5, 0);
+
+        CategoryPlot plot = (CategoryPlot) chart.getPlot();
+        plot.setBackgroundPaint(Color.WHITE);
+        plot.setRangeGridlinePaint(Color.BLACK);
+
+        NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setTickUnit(new NumberTickUnit(2));  
+
+        rangeAxis.setNumberFormatOverride(new NumberFormat() {
+            @Override
+            public StringBuffer format(double number, StringBuffer toAppendTo, FieldPosition pos) {
+                int hours = (int) number;
+                return toAppendTo.append(String.format("%02dh", hours));  
+            }
+
+            @Override
+            public StringBuffer format(long number, StringBuffer toAppendTo, FieldPosition pos) {
+                return format((double) number, toAppendTo, pos);
+            }
+
+            @Override
+            public Number parse(String source, ParsePosition parsePosition) {
+                return null;
+            }
+        });
+
+        IntervalBarRenderer renderer = new IntervalBarRenderer();
+        renderer.setSeriesPaint(0, new Color(255, 193, 7)); 
+
+        plot.setRenderer(renderer);
+
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(800, 400));
+
 
         gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
         gbc.insets = new Insets(0, 25, 0, 50);
-        add(linePanel, gbc);
+        add(chartPanel, gbc);
 
+        
+        //Legendas
         JLabel text3 = new JLabel("Sugestão de Ligamento");
         text3.setFont(new Font("Poppins", Font.BOLD, 16));
         gbc.gridx = 0;
@@ -452,7 +510,7 @@ public class Predict extends JFrame {
         gbc.insets = new Insets(20, 55, 0, 0);
         add(text3cont, gbc);
 
-        JLabel text4cont = new JLabel("1-6 Ago, 2024");
+        JLabel text4cont = new JLabel("1-7 Ago, 2024");
         text4cont.setFont(new Font("Poppins", Font.PLAIN, 11));
         gbc.gridx = 1;
         gbc.gridy = 5;
