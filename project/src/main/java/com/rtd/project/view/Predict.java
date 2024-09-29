@@ -198,7 +198,7 @@ public class Predict extends JFrame {
         gbc.weighty = 0.3;
         gbc.insets = new Insets(0, 50, 10, 25);
         add(barChartPanel, gbc);
-        
+
         DefaultCategoryDataset statusDataset = new DefaultCategoryDataset();
         statusDataset.addValue(2, "Atual", "01");
         statusDataset.addValue(3, "Atual", "02");
@@ -231,46 +231,46 @@ public class Predict extends JFrame {
         gbc.insets = new Insets(0, 25, 0, 50);
         add(linePanel, gbc);
 
-        JLabel text3 = new JLabel("Sugestão de ligamento/desligamento");
-        text3.setFont(new Font("Poppins", Font.PLAIN, 14));
+        JLabel text3 = new JLabel("Sugestão de Ligamento");
+        text3.setFont(new Font("Poppins", Font.BOLD, 16));
         gbc.gridx = 0;
         gbc.gridy = 4;
         gbc.gridwidth = 2;
         gbc.gridheight = 1;
         gbc.weightx = 0.1;
         gbc.weighty = 0;
-        gbc.insets = new Insets(0, 55, 0, 0);
+        gbc.insets = new Insets(30, 55, 0, 0);
         add(text3, gbc);
-        
-        JLabel sugest1 = new JLabel("18h: redução de 82% (14kW) ");
+
+        JLabel sugest1 = new JLabel("4h: redução de 75% (11,7kW) ");
         sugest1.setFont(new Font("Arial", Font.PLAIN, 15));
         gbc.gridx = 0;
         gbc.gridy = 7;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.weightx = 0; 
+        gbc.weightx = 0;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.fill = GridBagConstraints.NONE;
-        gbc.insets = new Insets(20, 55, 10, 10); 
+        gbc.insets = new Insets(-200, 55, 10, 10);
         add(sugest1, gbc);
 
         JButton buttonSugest1 = new JButton("Programar Ligamento");
         buttonSugest1.setBackground(new Color(33, 150, 243));
         buttonSugest1.setForeground(Color.WHITE);
         buttonSugest1.setBorder(new LineBorder(new Color(33, 150, 243), 5));
-        gbc.gridx = 0; 
+        gbc.gridx = 0;
         gbc.gridy = 7;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.weightx = 0; 
+        gbc.weightx = 0;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.NONE; 
-        gbc.insets = new Insets(20, 300, 10, 0);
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.insets = new Insets(-200, 450, 10, 0);
         add(buttonSugest1, gbc);
-        
-        JLabel sugest2 = new JLabel("19h: redução de 75% (11,7kW)");
+
+        JLabel sugest2 = new JLabel("4h30: redução de 82% (14kW)");
         sugest2.setFont(new Font("Arial", Font.PLAIN, 15));
         gbc.gridx = 0;
         gbc.gridy = 8;
@@ -278,25 +278,25 @@ public class Predict extends JFrame {
         gbc.gridheight = 1;
         gbc.weightx = 0.1;
         gbc.weighty = 0;
-        gbc.insets = new Insets(10, 55, 10, 0);
+        gbc.insets = new Insets(-130, 55, 10, 0);
         add(sugest2, gbc);
-        
-        JButton buttonSugest2 = new JButton("Programar Desligamento");
+
+        JButton buttonSugest2 = new JButton("Programar Ligamento");
         buttonSugest2.setBackground(new Color(33, 150, 243));
         buttonSugest2.setForeground(Color.WHITE);
         buttonSugest2.setBorder(new LineBorder(new Color(33, 150, 243), 5));
-        gbc.gridx = 0; 
+        gbc.gridx = 0;
         gbc.gridy = 8;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.weightx = 0; 
+        gbc.weightx = 0;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.NONE; 
-        gbc.insets = new Insets(10, 300, 10, 0);
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.insets = new Insets(-130, 450, 10, 0);
         add(buttonSugest2, gbc);
-        
-        JLabel sugest3 = new JLabel("20h: redução de 62% (9,6kW)");
+
+        JLabel sugest3 = new JLabel("4h40h: redução de 62% (9,6kW)");
         sugest3.setFont(new Font("Arial", Font.PLAIN, 15));
         gbc.gridx = 0;
         gbc.gridy = 9;
@@ -304,25 +304,25 @@ public class Predict extends JFrame {
         gbc.gridheight = 1;
         gbc.weightx = 0.1;
         gbc.weighty = 0;
-        gbc.insets = new Insets(10, 55, 10, 0);
+        gbc.insets = new Insets(-60, 55, 10, 0);
         add(sugest3, gbc);
-        
-        JButton buttonSugest3 = new JButton("Programar Desligamento");
+
+        JButton buttonSugest3 = new JButton("Programar Ligamento");
         buttonSugest3.setBackground(new Color(33, 150, 243));
         buttonSugest3.setForeground(Color.WHITE);
         buttonSugest3.setBorder(new LineBorder(new Color(33, 150, 243), 5));
-        gbc.gridx = 0; 
+        gbc.gridx = 0;
         gbc.gridy = 9;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.weightx = 0; 
+        gbc.weightx = 0;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.NONE; 
-        gbc.insets = new Insets(10, 300, 10, 0);
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.insets = new Insets(-60, 450, 10, 0);
         add(buttonSugest3, gbc);
-        
-        JLabel sugest4 = new JLabel("21h: risco de pane!");
+
+        JLabel sugest4 = new JLabel("4h50: risco de pane!");
         sugest4.setFont(new Font("Arial", Font.PLAIN, 15));
         gbc.gridx = 0;
         gbc.gridy = 10;
@@ -330,27 +330,61 @@ public class Predict extends JFrame {
         gbc.gridheight = 1;
         gbc.weightx = 0.1;
         gbc.weighty = 0;
-        gbc.insets = new Insets(10, 55, 10, 0);
+        gbc.insets = new Insets(-10, 55, 10, 0);
         add(sugest4, gbc);
-        
-        JButton buttonSugest4 = new JButton("Programar Desligamento");
-        buttonSugest4.setBackground(new Color(33, 150, 243));
+
+        JButton buttonSugest4 = new JButton("Programar Ligamento");
+        buttonSugest4.setBackground(new Color(200, 200, 200));
+        buttonSugest4.setEnabled(false);
         buttonSugest4.setForeground(Color.WHITE);
-        buttonSugest4.setBorder(new LineBorder(new Color(33, 150, 243), 5));
-        gbc.gridx = 0; 
+        buttonSugest4.setBorder(new LineBorder(new Color(200, 200, 200), 5));
+        gbc.gridx = 0;
         gbc.gridy = 10;
         gbc.gridwidth = 1;
         gbc.gridheight = 1;
-        gbc.weightx = 0; 
+        gbc.weightx = 0;
         gbc.weighty = 0;
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.fill = GridBagConstraints.NONE; 
-        gbc.insets = new Insets(10, 300, 10, 0);
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.insets = new Insets(-10, 450, 10, 0);
         add(buttonSugest4, gbc);
-        
+
+        buttonSugest1.addActionListener((ActionEvent e) -> {
+            try {
+                arduinoClient.turnOffLed("1"); // Ligando o LED no Arduino, simulando o "ligamento"
+                JOptionPane.showMessageDialog(null, "Desligamento programado às 4h: redução de 75% (11,7kW)", "Desligamento Programado", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao comunicar com o Arduino para ligar a máquina", "Erro de Comunicação", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+
+        buttonSugest2.addActionListener((ActionEvent e) -> {
+            try {
+                arduinoClient.turnOnLed("1"); // Desligando o LED no Arduino, simulando o "desligamento"
+                JOptionPane.showMessageDialog(null, "Ligamento programado às 4h30: redução de 82% (14kW)", "Ligamento Programado", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao comunicar com o Arduino para desligar a máquina", "Erro de Comunicação", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        buttonSugest3.addActionListener((ActionEvent e) -> {
+            try {
+                arduinoClient.turnOnLed("2"); // Ligando outro LED no Arduino
+                JOptionPane.showMessageDialog(null, "Ligamento programado às 4h40: redução de 62% (9,6kW)", "Ligamento Programado", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Erro ao comunicar com o Arduino para ligar a máquina", "Erro de Comunicação", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        buttonSugest4.addActionListener((ActionEvent e) -> {
+            // Não faz nada porque está desabilitado, indicando um risco de pane
+            JOptionPane.showMessageDialog(null, "Não é possível programar o ligamento devido ao risco de pane!", "Aviso de Pane", JOptionPane.WARNING_MESSAGE);
+        });
+
 
         JLabel text4 = new JLabel("Sugestão de Funcionamento Automático");
-        text4.setFont(new Font("Poppins", Font.PLAIN, 14));
+        text4.setFont(new Font("Poppins", Font.BOLD, 16));
 
         gbc.gridx = 1;
         gbc.gridy = 4;
@@ -358,9 +392,9 @@ public class Predict extends JFrame {
         gbc.gridheight = 1;
         gbc.weightx = 0.1;
         gbc.weighty = 0;
-        gbc.insets = new Insets(0, 55, 0, 0);
+        gbc.insets = new Insets(30, 55, 0, 0);
         add(text4, gbc);
-        
+
         JPanel colunasPanel = new JPanel(new GridBagLayout());
         colunasPanel.setBackground(Color.WHITE);
         colunasPanel.setBorder(new EmptyBorder(0, 0, 0, 20));
@@ -369,16 +403,16 @@ public class Predict extends JFrame {
         colGbc.insets = new Insets(5, 5, 5, 5);
 
         String[] textos = {
-            "3h45 - 23h15: com redução de 2%",
-            "4h30 - 23h15: com redução de 8%",
-            "5h50 - 23h15: com redução de 12%"
+                "3h45 - 23h15: com redução de 2%",
+                "4h30 - 23h15: com redução de 8%",
+                "5h50 - 23h15: com redução de 12%"
         };
 
         for (int i = 0; i < textos.length; i++) {
-            
+
             JLabel colunaTexto = new JLabel(textos[i]);
-            colunaTexto.setFont(new Font("Poppins", Font.PLAIN, 12));
-            
+            colunaTexto.setFont(new Font("Poppins", Font.PLAIN, 14));
+
             colGbc.gridx = 0;
             colGbc.gridy = i;
             colGbc.weightx = 0.8;
@@ -391,7 +425,7 @@ public class Predict extends JFrame {
             botaoControle.setBorder(new LineBorder(new Color(255, 87, 34), 5));
             botaoControle.setPreferredSize(new Dimension(150, 30));
             botaoControle.addActionListener((ActionEvent e) -> btControleAutomatico());
-            
+
             colGbc.gridx = 1;
             colGbc.weightx = 0;
             colGbc.fill = GridBagConstraints.NONE;
@@ -406,8 +440,8 @@ public class Predict extends JFrame {
         add(colunasPanel, gbc);
 
 
-        JLabel text3cont = new JLabel("Baseado nas predições de consumo, desligar às 18h para reduzir o consumo noturno");
-        text3cont.setFont(new Font("Poppins", Font.PLAIN, 11));
+        JLabel text3cont = new JLabel("Baseado nas predições de consumo, ligar às 4h30 para reduzir o consumo  em tempo ocioso");
+        text3cont.setFont(new Font("Poppins", Font.PLAIN, 14));
 
         gbc.gridx = 0;
         gbc.gridy = 5;
@@ -415,8 +449,7 @@ public class Predict extends JFrame {
         gbc.gridheight = 1;
         gbc.weightx = 0.1;
         gbc.weighty = 0;
-        gbc.insets = new Insets(0, 55, 0, 0);
-
+        gbc.insets = new Insets(20, 55, 0, 0);
         add(text3cont, gbc);
 
         JLabel text4cont = new JLabel("1-6 Ago, 2024");
@@ -431,24 +464,6 @@ public class Predict extends JFrame {
 
         add(text4cont, gbc);
 
-        //Botões
-        JButton button1 = new JButton("Aceitar Sugestão");
-
-        buttonSugest1.addActionListener((ActionEvent e) -> {
-
-            try {
-                arduinoClient.turnOnLed("1");
-                JOptionPane.showMessageDialog(null, "Sugestão aceita e LED ligado no Arduino!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Erro ao se comunicar com o Arduino", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
-        });
-
-
-
-        button1.setBackground(new Color(33, 150, 243));
-        button1.setForeground(Color.WHITE);
-        button1.setBorder(new LineBorder(new Color(33, 150, 243), 5));
 
         gbc.gridx = 0;
         gbc.gridy = 6;
@@ -461,7 +476,6 @@ public class Predict extends JFrame {
         gbc.insets = new Insets(5, 50, 5, 100);
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.NONE;
-        add(button1, gbc);
 
         //Footer
         JLabel footerLabel = new JLabel("Copyright Renault. All rights reserved", JLabel.CENTER);
@@ -490,9 +504,9 @@ public class Predict extends JFrame {
             dashboard.showPredict();
         });
     }
-    
+
     private void btControleAutomatico() {
-    	if (ledThread != null && ledThread.isAlive()) {
+        if (ledThread != null && ledThread.isAlive()) {
             // If the thread is running, interrupt it to stop the current task
             ledThread.interrupt();
             System.out.println("Previous task interrupted.");
