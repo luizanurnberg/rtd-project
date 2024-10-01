@@ -9,7 +9,7 @@ Repositório referente ao projeto para o Renault Transformation Day
 
 ###### Desenvolvedores: Equipe UDESCoders
 
-![Em Desenvolvimento](https://img.shields.io/badge/Status-Em_Desenvolvimento-green)
+![Finalizado](https://img.shields.io/badge/Status-Finalizado-green)
 
 ## Tecnologias Utilizadas
 [![Java](https://skillicons.dev/icons?i=java)](https://www.java.com)
