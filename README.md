@@ -1,15 +1,14 @@
-
 <p align="center">
   <img src="img/renaultLogo.png" alt="Renault Logo" width="400" height="180">
 </p>
 
 # Renault Transformation Day Project
 
-Repositório referente ao projeto para o Renault Transformation Day
+Repository for the Renault Transformation Day project.
 
-###### Desenvolvedores: Equipe UDESCoders
+###### Developers: Team UDESCoders
 
-![Finalizado](https://img.shields.io/badge/Status-Finalizado-green)
+![Completed](https://img.shields.io/badge/Status-Completed-green)
 
-## Tecnologias Utilizadas
+## Technologies Used
 [![Java](https://skillicons.dev/icons?i=java)](https://www.java.com)
